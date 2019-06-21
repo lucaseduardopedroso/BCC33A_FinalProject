@@ -4,15 +4,15 @@
 #include <stdlib.h>
 #include <string.h>
 
-isMaxHeap();
-isMinHeap();
+isMaxHeap(); //Ilzimara
+isMinHeap(); //Ilzimara
 isBST();
-isAVL();
-isComplete();
-lowestValue();
-highestValue();
-mirrorTree();
-areCousins();
+isAVL(); //Gustavo
+isComplete(); //Gustavo
+lowestValue(); //Gabriel
+highestValue(); //Gabriel
+mirrorTree(); // Lucas Eduardo  
+areCousins(); // Lucas Eduardo
 isSUM();
 
 int main(){
