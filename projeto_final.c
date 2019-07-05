@@ -9,12 +9,53 @@ isMinHeap();
 isBST();
 isAVL();
 isComplete();
-lowestValue();
-highestValue();
+lowestValue();//gabriel
+highestValue();//gabriel
 mirrorTree();
 areCousins();
 isSUM();
 
-int main(){
+ struct Node {
+    int data; 
+    struct Node* left, *right; 
+}; 
 
-  };
+struct Node*NovoNo(int data){ 
+    struct Node* node = (struct Node*)malloc(sizeof(struct Node)); 
+    node->data = data; 
+    node->left = node->right = NULL; 
+    return(node); 
+} 
+
+//Função que retorna maior valor.
+int highestValue(struct Node* root) 
+{  
+    if (root == NULL) 
+      return INT_MIN; 
+
+    int res = root->data; 
+    int lres = findMax(root->left); 
+    int rres = findMax(root->right); 
+    if (lres > res) 
+      res = lres; 
+    if (rres > res) 
+      res = rres; 
+    return res; 
+} 
+
+//Função que retorna menor valor. 
+int lowestValue(struct Node* root) 
+{ 
+
+    if (root == NULL) 
+      return INT_MAX; 
+  
+    int res = root->data; 
+    int lres = findMin(root->left); 
+    int rres = findMin(root->right); 
+    if (lres < res) 
+      res = lres; 
+    if (rres < res) 
+      res = rres; 
+    return res; 
+} 
