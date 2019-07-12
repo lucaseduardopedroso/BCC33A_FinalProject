@@ -45,7 +45,6 @@ int highestValue(struct Node* node)
 //Função que retorna menor valor. 
 int lowestValue(struct Node* node) 
 { 
-
     if (node == NULL) 
       return 0; 
     int res = node->data; 
@@ -57,12 +56,14 @@ int lowestValue(struct Node* node)
       res = dirres; 
     return res; 
 } 
+
 int soma(struct Node* node) //Soma dos valores
 {
   if(node == NULL)
   return 0;
   return soma(node->left)+ note->data + soma(node->right);
 }
+
 int isSUM(struct Node* node) //retorna 1 (ou True) se a árvore for uma árvore SOMA. Uma árvore SOMA é aquela cujo valor do pai corresponde à soma de todos os valores nas subárvores esquerda e direita
 {
     if (node == NULL || node->right == NULL && node->left == NULL)
@@ -75,4 +76,53 @@ int isSUM(struct Node* node) //retorna 1 (ou True) se a árvore for uma árvore 
       return 1;
 
   return 0;
+}
+//isMaxHeap
+//função recebe a arvore, a raiz e o tamanho
+int isMaxHeap(int *arvore, int raiz ,int tam){
+    int filhoEsq = (2*raiz) + 1;  //a variavel filhoEsq recebe o valor do indice do filho esquerdo da raiz
+    int filhoDir = (2*raiz) + 2;  //a variavel filhoDir recebe o valor do indice do filho direito da raiz
+    //faz a verificação se os filhos estão no parametro do tamanho (dentro da arvore), se não tiver não executa a recursão
+    //ou seja essa condição vai ser a nossa condição de parada
+    if(filhoEsq < tam || filhoDir < tam){
+        //faz a verificação do Max heap se algum filho for maior que a raiz sai do if, e retorna 0 dizendo que não é o max heap
+        if(arvore[raiz] < arvore[filhoEsq] || arvore[raiz] < arvore[filhoDir]){
+            return 0;
+        }
+        //verifica todos os filhos do lado esquerdo e depois do lado direito
+        return 1 && ( (isMaxHeap(arvore,filhoEsq,tam)) && (isMaxHeap(arvore,filhoDir,tam)));
+    }   
+}
+//isMinHeap
+//função recebe a arvore, a raiz e o tamanho
+int isMinHeap(int Node* node, int raiz ,int tam){
+    int filhoEsq = node->left;  //a variavel filhoEsq recebe o valor do indice do filho esquerdo da raiz
+    int filhoDir = node->right;  //a variavel filhoDir recebe o valor do indice do filho direito da raiz
+    //faz a verificação se os filhos estão no parametro do tamanho (dentro da arvore), se não tiver não executa a recursão
+    //ou seja essa condição vai ser a nossa condição de parada
+    if(filhoEsq < tam || filhoDir < tam){
+        //faz a verificação do MinHeap se algum filho for menor que a raiz sai do if, e retorna 0 dizendo que não é o min heap
+        if(arvore[raiz] < arvore[filhoEsq] || arvore[raiz] < arvore[filhoDir]){
+            return 0;
+        }
+        //verifica todos os filhos do lado esquerdo e depois do lado direito
+        return 1 && ( (isMinHeap(arvore,filhoEsq,tam)) && (isMinHeap(arvore,filhoDir,tam)));
+    }
+}
+//isBST
+int isBST(int Node* node ,int raiz ,int tam){
+    int filhoEsq = node->left; //a variavel filhoEsq recebe o valor do indice do filho esquerdo da raiz
+    int filhoDir = node->right; //a variavel filhoDir recebe o valor do indice do filho direito da raiz
+     /*faz a verificação se os filhos estão no parametro do tamanho (dentro da arvore), se não tiver não executa a recursão
+        ou seja essa condição vai ser a nossa condição de parada*/
+    if(filhoEsq < tam && filhoDir < tam){
+
+        /*faz a verificação da BST, se algum filho da esquerda for maior que a raiz 
+            ou filho da direita for menor que a raiz, sai do if e retorna 0 dizendo que não é BST */
+        if(arvore[raiz] < arvore[filhoEsq] || arvore[raiz] > arvore[filhoDir]){
+            return 0;
+        }
+        //verifica todos os filhos do lado esquerdo e depois do lado direito
+        return 1 && (isBST(arvore,filhoEsq,tam)) && (isBST(arvore,filhoDir,tam));
+    }
 }
